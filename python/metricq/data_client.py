@@ -32,8 +32,8 @@ from yarl import URL
 
 from .agent import ReconnectTimeoutError
 from .client import Client
-from .logging import get_logger
 from .connection_watchdog import ConnectionWatchdog
+from .logging import get_logger
 
 logger = get_logger(__name__)
 
@@ -95,7 +95,7 @@ class DataClient(Client):
             self._data_connection_watchdog.start()
             self._data_connection_watchdog.set_established()
 
-    async def stop(self, exception: Optional[Exception]):
+    async def stop(self, exception: Optional[Exception] = None):
         logger.info("closing data channel and connection.")
         await self._data_connection_watchdog.stop()
         if self.data_channel:
